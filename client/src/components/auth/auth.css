@@ -1,0 +1,71 @@
+.auth{
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.auth .auth-content{
+    width: 320px;
+    transform: translateY(-60px);
+}
+.auth-content .auth-header{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.auth-content .auth-header span{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+.auth-content .auth-header span:first-of-type{
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    background-color: rgb(248, 20, 58);
+    margin-bottom: 5px;
+}
+.auth-content .auth-header span svg{
+    font-size: 18px;
+}
+.auth-content form{
+    display: block;
+    width: 100%;
+}
+.auth-content form div{
+    margin-bottom: 15px;
+}
+.auth-content form div input{
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    outline: none;
+    border-radius: 3px;
+    border: 2px solid rgb(30, 86, 170);
+}
+.auth-content form div span{
+    color: rgb(248, 20, 58);
+    text-transform: capitalize
+}
+.auth-content form button{
+    display: block;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    padding: 5px 0px;
+    background-color: rgb(30, 86, 170);
+    color: #fff;
+    font-weight: bold;
+}
+.auth-content form .redirect{
+    margin: 0px;
+    font-weight: bold;
+}
+.auth-content form .redirect a{
+    text-decoration: none;
+    margin-left: 5px;
+}
