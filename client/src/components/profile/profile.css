@@ -32,6 +32,7 @@
 .settingsForm .settingsPP label svg{
     font-size: 20px;
     color: rgba(248, 20, 58,0.8);
+    cursor: pointer;
 }
 .settingsForm>div:not(.settingsPP,.settingsSubmit){
     display: flex;
@@ -59,4 +60,8 @@
     font-weight: bold;
     padding: 5px 25px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }

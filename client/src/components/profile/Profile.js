@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { clearState, updateProfile, UserInfo } from "../../features/blog/userSlice";
+import { clearState, imgUpload, updateProfile, UserInfo } from "../../features/blog/userSlice";
+import Ring from "react-cssfx-loading/lib/Ring"
 import { imageUpload } from "../utils/uploadImg";
 import { useToasts } from "react-toast-notifications";
 import "./profile.css"
@@ -15,7 +16,7 @@ const Profile = () =>{
     const dispatch = useDispatch()
     const history = useHistory();
     const { addToast:notify } = useToasts()
-    const {userInfo,isError,isSuccess} = useSelector((state)=>state.user)
+    const {userInfo,isError,isSuccess,isLoading} = useSelector((state)=>state.user)
     const[file,setFile] = useState(null)
     let userdata={userId: userInfo._id,username:userInfo.username,email:userInfo.email,password:"",profilePic:userInfo.profilePic}
     const[user,setUser]=useState(userdata)
@@ -61,7 +62,8 @@ const Profile = () =>{
     
     const handleSubmit = async (e) => {
       e.preventDefault();
-      if (file) {
+      if (file&&typeof(file)==="object") {
+          await dispatch(imgUpload())
           let img = await imageUpload(file)
           user.profilePic = img;
       }
@@ -122,7 +124,11 @@ const Profile = () =>{
           </div>
           <div className="settingsSubmit">
             <button type="submit">
-              Update
+              <span>Update</span>
+              {
+                isLoading&&
+                <Ring color="#FFF" width="25px" height="25px" duration="3s" />
+              }
             </button>
           </div>
         </form>

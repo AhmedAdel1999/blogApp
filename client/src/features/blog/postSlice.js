@@ -1,9 +1,10 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
-import axios from "axios"
+import axiosInstance from '../../components/utils/baseUrl';
 const initialState = {
   posts:[],
   isError:false,
   isSuccess:false,
+  isLoading:false,
   errorMsg:"",
   successMsg:"",
   status: 'idle',
@@ -14,7 +15,7 @@ export const ourPosts =createAsyncThunk(
   "post/ourPosts",
   async(str,{fulfillWithValue,rejectWithValue})=>{
     try {
-      let response = await axios.get(`http://localhost:5000/api/posts${str}`)
+      let response = await axiosInstance.get(`/api/posts${str}`)
       let data = await response.data
       return fulfillWithValue(data);
     } catch (error) {
@@ -26,7 +27,7 @@ export const CreatePost =createAsyncThunk(
   "post/CreatePost",
   async(newpost,{fulfillWithValue,rejectWithValue})=>{
     try {
-      let response = await axios.post(`http://localhost:5000/api/posts`, newpost)
+      let response = await axiosInstance.post(`/api/posts`, newpost)
       let data = await response.data
       return fulfillWithValue(data);
     } catch (error) {
@@ -38,7 +39,7 @@ export const UpdatePost =createAsyncThunk(
   "post/UpdatePost",
   async({id,newpost},{fulfillWithValue,rejectWithValue})=>{
     try {
-      let response = await axios.put(`http://localhost:5000/api/posts/${id}`, newpost)
+      let response = await axiosInstance.put(`/api/posts/${id}`, newpost)
       let data = await response.data
       return fulfillWithValue(data);
     } catch (error) {
@@ -51,7 +52,7 @@ export const deletePost =createAsyncThunk(
   async(obj,{fulfillWithValue,rejectWithValue})=>{
     try {
       const{id,username}=obj
-    let response = await axios.delete(`http://localhost:5000/api/posts/${id}`,{data:{username}})
+    let response = await axiosInstance.delete(`/api/posts/${id}`,{data:{username}})
     let data = await response.data; 
     return fulfillWithValue(data)
     } catch (error) {
@@ -68,26 +69,41 @@ export const postSlice = createSlice({
       state.isSuccess=false;
       state.successMsg="";
       state.errorMsg="";
+    }),
+    imgUpload:((state)=>{
+      state.isLoading=true
     })
   },
   extraReducers:{
     //creating
+    [CreatePost.pending]:((state)=>{
+      state.isLoading=true
+    }),
     [CreatePost.fulfilled]:((state)=>{
       state.isSuccess=true;
+      state.isLoading=false;
       state.isError=false
       state.successMsg="Post Was Created!"
     }),
     [CreatePost.rejected]:((state,action)=>{
       state.isSuccess=false;
+      state.isLoading=false;
       state.isError=true
       state.errorMsg="Post Was Not Created!"
     }),
 
     //updating
+    [UpdatePost.pending]:((state)=>{
+      state.isLoading=true
+    }),
     [UpdatePost.fulfilled]:((state)=>{
       state.isSuccess=true;
+      state.isLoading=false
       state.isError=false
       state.successMsg="Post Was Updated!"
+    }),
+    [UpdatePost.rejected]:((state)=>{
+      state.isLoading=false
     }),
 
     //deleting
@@ -105,5 +121,5 @@ export const postSlice = createSlice({
 
   },
 });
-export const{ clearState } = postSlice.actions
+export const{ clearState,imgUpload } = postSlice.actions
 export default postSlice.reducer;

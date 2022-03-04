@@ -12,17 +12,23 @@
     display: block;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 .singlepost .post-details{
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+.singlepost .post-details>div p{
+    margin: 0px;
+}
 .singlepost .post-details>div{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 .singlepost .post-details>div div,
 .singlepost .post-details>div div a{
     color: darkolivegreen;
@@ -38,7 +44,7 @@
 }
 .singlepost .post-details>div:last-of-type{
     justify-content: center;
-    gap: 60px;
+    gap: 15px 60px;
     font-weight: bold;
     font-size: 20px;
 }

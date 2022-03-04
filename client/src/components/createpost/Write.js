@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { ourCategory } from "../../features/blog/categorySlice";
+import Load from "../load/Load";
 import { useToasts } from "react-toast-notifications";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes,faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
-import { clearState, CreatePost, UpdatePost } from "../../features/blog/postSlice";
+import { clearState, CreatePost, imgUpload, UpdatePost } from "../../features/blog/postSlice";
 import { imageUpload } from "../utils/uploadImg";
 import "./write.css"
 
@@ -13,7 +14,7 @@ import "./write.css"
 const Write = () =>{
     const userInfo = useSelector((state)=>state.user.userInfo)
     const categories = useSelector((state)=>state.category.categories)
-    const {posts,isError,isSuccess,errorMsg,successMsg} = useSelector((state)=>state.post)
+    const {posts,isError,isSuccess,isLoading,errorMsg,successMsg} = useSelector((state)=>state.post)
     const intialPost={username:userInfo.username,title:"",photo:"",desc:"",category:categories[0]._id,}
     const[post,setPost] = useState({...intialPost});
     let newpost = {...post}
@@ -67,6 +68,7 @@ const Write = () =>{
     const handelSubmit = async (e) =>{
         e.preventDefault();
         if (file&&typeof(file)==="object") {
+            await dispatch(imgUpload())
             let img= await imageUpload(file)
             newpost={...newpost,photo:img}     
         }
@@ -83,7 +85,10 @@ const Write = () =>{
             }
         } catch (err) {alert(err.response.data.msg)}
     }
-    
+    if(isLoading){
+        return <Load />
+    }
+
     return(
         <div className="create-section">
            <form onSubmit={handelSubmit}>

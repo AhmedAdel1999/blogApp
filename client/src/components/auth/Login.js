@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { clearState, login } from "../../features/blog/userSlice";
 import { useToasts } from "react-toast-notifications";
+import Load from "../load/Load";
 import ErrorMsg from "../utils/errorMsg"
 import * as Yup from "yup";
 import "./auth.css"
@@ -14,7 +15,7 @@ import "./auth.css"
 
 const Login = () => {
 
-  const{isSuccess,isError,errMessage,userInfo} = useSelector((state)=>state.user)
+  const{isSuccess,isError,errMessage,isLoading,userInfo} = useSelector((state)=>state.user)
   const dispatch = useDispatch();
   const history = useHistory()
   const { addToast:notify } = useToasts()
@@ -44,6 +45,9 @@ const Login = () => {
     return schema
   }
 
+  if(isLoading){
+    return <Load />
+  }
   return (
     <div className="auth">
         <div className="auth-content">
