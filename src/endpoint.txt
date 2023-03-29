@@ -1,0 +1,14 @@
+http://localhost:5000/images/ here you store your images
+http://localhost:5000/api/auth/register,obj post 
+http://localhost:5000/api/auth/login,obj post
+http://localhost:5000/api/users/${id} get  to get user information
+http://localhost:5000/api/users/${id}",userData put this is to update user information
+http://localhost:5000/api/categories",{name:value} post this to create category
+http://localhost:5000/api/categories/${id}`,name put this to update category
+http://localhost:5000/api/categories/${id} delete this to delete category
+http://localhost:5000/api/categories" get this to get categories
+http://localhost:5000/api/posts${search} get this is to get posts
+http://localhost:5000/api/posts/${id}`,{data:{username}} delete this is to delete post
+"http://localhost:5000/api/posts",postData post this is to create post
+http://localhost:5000/api/posts/${id}`,newpost put this is to update post
+http://localhost:5000/api/upload",data  post this is to upload images

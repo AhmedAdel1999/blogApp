@@ -1,0 +1,84 @@
+.singlepost{
+    padding-top: 20px;
+    text-transform: capitalize;
+}
+.singlepost .post-img{
+    height: 300px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.singlepost .post-img img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.singlepost .post-details{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.singlepost .post-details>div p{
+    margin: 0px;
+}
+.singlepost .post-details>div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.singlepost .post-details>div div,
+.singlepost .post-details>div div a{
+    color: darkolivegreen;
+    font-weight: bold;
+}
+.singlepost .post-details>div div span{
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(248, 20, 58);
+}
+.singlepost .post-details>div div a{
+    text-decoration: none;
+}
+.singlepost .post-details>div:last-of-type{
+    justify-content: center;
+    gap: 15px 60px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.singlepost .post-details>div .controlls{
+    display: flex;
+    gap: 15px;
+}
+.singlepost .post-details>div .controlls a{
+    text-decoration: none;
+    color: darkolivegreen;
+}
+.singlepost .post-details>div .controlls>svg{
+    color: rgb(248, 20, 58);
+    transform: translateY(4px);
+    cursor: pointer;
+}
+.singlepost .post-desc{
+    text-indent: 20px;
+    color: #444;
+}
+.singlepost .post-details>div button{
+    width: 30px;
+    height: 30px;
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgb(248, 20, 58);
+    color: #fff;
+}
+.singlepost .post-desc::first-letter{
+    color:  darkolivegreen;
+    font-weight: bold;
+    font-size: 20px;
+}
